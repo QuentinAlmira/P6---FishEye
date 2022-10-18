@@ -14,7 +14,7 @@ async function getPhotographers() {
       );
       console.log(error);
     });
-
+  console.log(photographers);
   return { photographers: [...photographers] };
 }
 
@@ -24,7 +24,8 @@ async function displayData(photographers) {
   const photographersSection = document.querySelector("#main");
 
   photographers.forEach((photographer) => {
-    console.log(photographer);
+    const link = document.createElement("a");
+    link.setAttribute("href", `/photographer.html?id=${photographer.id}`);
 
     const article = document.createElement("article");
 
@@ -58,15 +59,13 @@ async function displayData(photographers) {
     pPrice.textContent = `${photographer.price}€`;
     article.appendChild(pPrice);
 
+    link.appendChild(article);
     // Article closing
-    photographersSection.appendChild(article);
-
-    /*const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-    createPhotographerCard(element);*/
+    photographersSection.appendChild(link);
   });
 }
+
+// Afficher les data
 
 async function init() {
   // Récupère les datas des photographes
@@ -75,14 +74,3 @@ async function init() {
 }
 
 init();
-
-/*Commennt crer les variables?*/
-/*
-function createPhotographerCard(photographer) {
-  this.$wrapperCard = document.createElement("li");
-
-
-/*Comment récuperer juste les données de photographes?*/
-/*Comment utiliser les data du JSON photographes??*/
-/*getter??*/
-/*string??*/
