@@ -137,3 +137,7 @@ form input {
   border: none;
   border-radius: 5px;
 }
+
+.photographer-Gallery img {
+  height: 150px;
+}
