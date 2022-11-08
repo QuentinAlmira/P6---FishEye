@@ -1,9 +1,15 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+const modalbg = document.querySelector("#contact_modal");
+
+// launch modal event
+function launchModal() {
+  modalbg.style.display = "block";
 }
 
+// close modal
+const modalCross = document.querySelector(".close--white");
+
+modalCross.addEventListener("click", closeModal);
+
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+  modalbg.style.display = "none";
 }
