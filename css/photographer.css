@@ -247,3 +247,8 @@ form input {
   transform: rotate(180deg);
   left: 1rem;
 }
+
+.error {
+  background-color: #901c1c;
+  color: green;
+}

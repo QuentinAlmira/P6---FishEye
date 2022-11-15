@@ -42,3 +42,5 @@ async function getMedia() {
     });
   return { media: [...media] };
 }
+
+// filtrer les Media par photographers

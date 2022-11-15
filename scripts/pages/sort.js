@@ -76,3 +76,9 @@ fruits.sort(function(a, b) {
 });
 
 displayArray(fruits, true, "name");
+
+async function filter(media) {
+  let photo = media.filter((photo) => photo.photographerId.toString() === id);
+
+  console.log(photo);
+}

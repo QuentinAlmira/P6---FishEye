@@ -21,6 +21,16 @@
 
     <main class="app" id="main">
 
+      <!--Menu de tri-->
+
+      <div id="menuSort"></div>
+      <div class="sorting">
+        <button class="sortingByName">Name</button>
+        <button class="sortingByDate">Date</button>
+
+      </div>
+
+
 
       <!-- Photographe page -->
 
@@ -29,12 +39,15 @@
       </div>
 
 
+
       <!-- Carrousel -->
 
       <div class="Carrousel" id="Carrousel">
         <div class="suivant">></div>
         <div class="precedent">></div>
       </div>
+
+
       <!-- Modal -->
       <div class="contact_modal" id="contact_modal">
 
@@ -62,7 +75,7 @@
   </div>
 
   <script src="./scripts/api.js"></script>
-  <script src="/scripts/pages/photographer.js"></script>
+  <script type="module" src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
 </body>
 
