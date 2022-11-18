@@ -1,6 +1,5 @@
 import { displayHeader } from "../factories/photographerFactory.js";
 import { CreatPhotographerGallery } from "../factories/photographerFactory.js";
-// import { SortingMenu } from "../factories/SortingMenu.js";
 
 // ***********************************************-Photographers-*******************************************************************
 
@@ -30,7 +29,7 @@ async function filterMedia(media) {
 }
 
 // filtrer les photos par nom
-async function sortByName(photos) {
+function sortByName(photos) {
   photos.sort(function(a, b) {
     return a.title.localeCompare(b.title);
   });
@@ -45,13 +44,15 @@ function sortByDate(photos) {
   CreatPhotographerGallery(photos);
 }
 
-// Afficher les datas media
+// Afficher les datas medias dependants
+
 async function lunch() {
   const { media } = await getMedia();
   let photos = await filterMedia(media);
-
+  // Afficher la gallerie du photographe
   CreatPhotographerGallery(photos);
 
+  // Afficher la gallerie du photographe / Trier par nom
   const nameSort = document.querySelector(".sortingByName");
   nameSort.addEventListener("click", function(event) {
     event.preventDefault();
@@ -59,13 +60,16 @@ async function lunch() {
     sortByName(photos);
   });
 
+  // Afficher la gallerie du photographe / Trier par date
   const dateSort = document.querySelector(".sortingByDate");
   dateSort.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     sortByDate(photos);
-    console.log(photos);
   });
+
+  // CreatCarrousel(photos);
+  // RunCarrousel();
 }
 
 lunch();

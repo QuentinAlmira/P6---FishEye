@@ -1,14 +1,13 @@
 /*Photographe page*/
 
-.header__link__page img {
-  width: 100%;
-  padding-left: 50px;
-}
-
 .photographer-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.header__link__page img {
+  width: 100%;
+  padding-left: 50px;
 }
 
 .photographer-page__header {
@@ -185,6 +184,7 @@ form input {
   display: flex;
   flex-direction: column;
   color: #901c1c;
+  cursor: pointer;
 }
 
 .photographer-Portfolio img video {
@@ -198,34 +198,30 @@ form input {
 /* Carrousel */
 
 .Carrousel {
-  display: none;
+  width: 100%;
+}
+
+.slider {
   width: 100%;
   position: relative;
 }
 
-.slider {
-  width: 80%;
-  height: 100vh;
-  background-color: blue;
-  position: absolute;
-  left: 12%;
-}
-
-.Carrousel img {
-  object-fit: cover;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.slider img {
+  height: 250px;
+  width: 100%;
   opacity: 0;
   transition: opacity 0.5s;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-.Carrousel img.active {
+.slider img.active {
+  object-fit: cover;
   opacity: 1;
 }
 
-.suivant,
+/* .suivant,
 .precedent {
   display: flex;
   align-items: center;
@@ -237,15 +233,26 @@ form input {
   cursor: pointer;
   top: -50%;
   z-index: 5;
-}
+} */
 
+.selected_menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  color: white;
+  background-color: #d3573c;
+}
 .suivant {
-  right: 1rem;
+  height: 50px;
+  display: flex;
+  font-size: 3rem;
 }
 
 .precedent {
   transform: rotate(180deg);
-  left: 1rem;
+  display: flex;
+  font-size: 3rem;
 }
 
 .error {

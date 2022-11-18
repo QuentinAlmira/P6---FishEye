@@ -1,68 +1,66 @@
 /****************Carousel */
 
-async function CreatCarrousel(media) {
-  let photo = media.filter((photo) => photo.photographerId.toString() === id);
+// export function CreatCarrousel(photos) {
+//   const Carrousel = document.querySelector("#Carrousel");
 
-  const slider = document.createElement("div");
-  slider.classList.add("slider");
-  Carrousel.appendChild(slider);
+//   const slider = document.createElement("div");
+//   slider.classList.add("slider");
+//   Carrousel.appendChild(slider);
 
-  photo.forEach((img) => {
-    const pPicture = document.createElement("img");
-    pPicture.setAttribute(
-      "src",
-      `./assets/Portfolio/${img.photographerId}/${img.image}`
-    );
-    pPicture.classList.add("img__slider");
-    slider.appendChild(pPicture);
-  });
-}
+//   photos.forEach((img) => {
+//     const pPicture = document.createElement("img");
+//     pPicture.setAttribute(
+//       "src",
+//       `./assets/Portfolio/${img.photographerId}/${img.image}`
+//     );
+//     pPicture.classList.add("img__slider");
+//     slider.appendChild(pPicture);
+//    });
 
-// remove active img
+// ---------------------------------------------------------------------------------------------
+//   document.querySelectorAll(".pictureCard").forEach((element) => {
+//     element.addEventListener("click", function(event) {
+//       event.stopPropagation();
+//       event.preventDefault();
 
-function removeActiveimage(img__slider) {
-  for (let i = 0; i < img__slider.length; i++) {
-    img__slider[i].classList.remove("active");
-  }
-}
-async function RunCarrousel(position) {
-  let img__slider = document.getElementsByClassName("img__slider");
-  let etape = 0;
+//       let picturepos = element.dataset.pos;
 
-  img__slider[position].classList.add("active");
+//       let img__slider = document.getElementsByClassName("img__slider");
+//       let etape = 0;
 
-  // set up button next
+//       img__slider[picturepos].classList.add("active");
+//     });
+//   });
+// }
 
-  let suivant = document.querySelector(".suivant");
+// Controle du Slider
+// set up button next
+// let suivant = document.querySelector(".suivant");
+// suivant.addEventListener("click", function() {
+//   etape++;
+//   if (etape >= img__slider.length) {
+//     etape = 0;
+//   }
 
-  suivant.addEventListener("click", function() {
-    etape++;
-    if (etape >= img__slider.length) {
-      etape = 0;
-    }
-    removeActiveimage();
-    img__slider[etape].classList.add("active");
-  });
+//   for (let i = 0; i < img__slider.length; i++) {
+//     img__slider[i].classList.remove("active");
+//   }
 
-  // set up button previous
+//   img__slider[etape].classList.add("active");
+// });
 
-  let precedent = document.querySelector(".precedent");
+// // set up button previous
 
-  precedent.addEventListener("click", function() {
-    etape--;
-    if (etape < 0) {
-      etape = img__slider.length - 1;
-    }
+// let precedent = document.querySelector(".precedent");
+// precedent.addEventListener("click", function() {
+//   etape--;
+//   if (etape < 0) {
+//     etape = img__slider.length - 1;
+//   }
 
-    removeActiveimage();
-    img__slider[etape].classList.add("active");
-  });
-}
+//   for (let i = 0; i < img__slider.length; i++) {
+//     img__slider[i].classList.remove("active");
+//   }
 
-// Afficher le Carrousel
-const Carrousel = document.querySelector("#Carrousel");
-
-async function displayCarrousel() {
-  Carrousel.style.display = "block";
-  photographershead.style.display = "none";
-}
+//   img__slider[etape].classList.add("active");
+// });
