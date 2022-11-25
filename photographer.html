@@ -3,14 +3,18 @@
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/filter.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/7399728304.js" crossorigin="anonymous"></script>
   <title>Fisheye - photographe </title>
 </head>
 
 
 <body>
+
+
   <div class="content" id="content">
     <!--Header-->
     <header class="header">
@@ -21,14 +25,6 @@
 
     <main class="app" id="main">
 
-      <!--Menu de tri-->
-
-      <div id="menuSort"></div>
-      <div class="sorting">
-        <button class="sortingByName">Name</button>
-        <button class="sortingByDate">Date</button>
-
-      </div>
 
 
 
@@ -38,43 +34,47 @@
 
       </div>
 
+  </div>
+
+  <div class="interactiv_content">
+
+    <!-- Carrousel -->
+
+    <div class="Carrousel" id="Carrousel">
+    </div>
 
 
-      <!-- Carrousel -->
+    <!-- Modal -->
+    <div class="contact_modal" id="contact_modal">
 
-      <div class="Carrousel" id="Carrousel">
-        <div class="selected_menu">
-          <button class="suivant">></button>
-          <button class="precedent">></button>
-        </div>
-      </div>
+      <section class="modal" role="dialog" id="modalForm"><button class="close--white">✕</button>
+        <h1 class="modal__form__title" id="dialog-title">Contactez-moi <br>Mimi Keel</h1>
+        <form class="modal__form__form-content" id="form"><label class="modal__form__form-content__label"
+            for="firstNameInput">Prénom</label><input class="modal__form__form-content__input" id="firstNameInput"
+            name="prénom" type="text"><label class="modal__form__form-content__label"
+            for="lastNameInput">Nom</label><input class="modal__form__form-content__input" id="lastNameInput"
+            name="LastName" type="text"><label class="modal__form__form-content__label" id="email"
+            for="emailInput">Email</label><input class="modal__form__form-content__input" id="emailInput" name="email"
+            type="mail"><label class="modal__form__form-content__label" id="message" for="messageInput">Votre
+            message</label><textarea class="modal__form__form-content__input--message" id="messageInput" name="message"
+            type="text"></textarea><button class="modal__form__form-content__button">Envoyer</button>
+        </form>
 
+      </section>
+    </div>
 
-      <!-- Modal -->
-      <div class="contact_modal" id="contact_modal">
-
-        <section class="modal" role="dialog" id="modalForm"><button class="close--white">✕</button>
-          <h1 class="modal__form__title" id="dialog-title">Contactez-moi <br>Mimi Keel</h1>
-          <form class="modal__form__form-content" id="form"><label class="modal__form__form-content__label"
-              for="firstNameInput">Prénom</label><input class="modal__form__form-content__input" id="firstNameInput"
-              name="prénom" type="text"><label class="modal__form__form-content__label"
-              for="lastNameInput">Nom</label><input class="modal__form__form-content__input" id="lastNameInput"
-              name="LastName" type="text"><label class="modal__form__form-content__label" id="email"
-              for="emailInput">Email</label><input class="modal__form__form-content__input" id="emailInput" name="email"
-              type="mail"><label class="modal__form__form-content__label" id="message" for="messageInput">Votre
-              message</label><textarea class="modal__form__form-content__input--message" id="messageInput"
-              name="message" type="text"></textarea><button class="modal__form__form-content__button">Envoyer</button>
-          </form>
-
-    </main>
-
-
-    </section>
   </div>
 
 
 
-  </div>
+  </main>
+
+
+
+
+
+
+
 
   <script src="./scripts/api.js"></script>
   <script type="module" src="/scripts/pages/photographer.js"></script>

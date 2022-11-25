@@ -1,0 +1,61 @@
+/* Sort */
+
+.menu_sort {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.menuSort_title {
+  margin-right: 30px;
+}
+
+/* ---------------------------- */
+
+#menu {
+  width: 150px;
+  background-color: #901c1c;
+  color: antiquewhite;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.menuSort_title {
+  margin-right: 20px;
+}
+
+.menu_current_choice {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.menu_other_choice {
+  width: 182px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2200000;
+  background-color: #901c1c;
+  color: antiquewhite;
+  display: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.choice {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

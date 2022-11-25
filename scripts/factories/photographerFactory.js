@@ -21,6 +21,8 @@ export async function displayHeader(photographer) {
   pHeaderLeftinfo.appendChild(cardName);
   cardName.textContent = `${photographer.name}`;
 
+  console.log(photographer.name);
+
   const cardLocation = document.createElement("p");
   cardLocation.classList.add("card__location");
   pHeaderLeftinfo.appendChild(cardLocation);
@@ -57,8 +59,6 @@ export async function displayHeader(photographer) {
 // -------------------------------------Gallery------------------------------------------------------
 
 export async function CreatPhotographerGallery(photos) {
-  // ---------------------------------------
-
   const photographershead = document.querySelector("#photographer-page");
 
   if (document.querySelector(".photographer-Gallery") != null)
@@ -77,8 +77,13 @@ export async function CreatPhotographerGallery(photos) {
   photos.forEach((img) => {
     const pictureCard = document.createElement("div");
     pictureCard.classList.add("pictureCard");
-    pictureCard.setAttribute("data-pos", pos);
+    // pictureCard.setAttribute("data-pos", pos);
     pPortfolio.appendChild(pictureCard);
+
+    const pictureCardContent = document.createElement("div");
+    pictureCardContent.classList.add("pictureCard_content");
+    pictureCardContent.setAttribute("data-pos", pos);
+    pictureCard.appendChild(pictureCardContent);
 
     if (img.image !== undefined) {
       const pPicture = document.createElement("img");
@@ -86,7 +91,7 @@ export async function CreatPhotographerGallery(photos) {
         "src",
         `./assets/Portfolio/${img.photographerId}/${img.image}`
       );
-      pictureCard.appendChild(pPicture);
+      pictureCardContent.appendChild(pPicture);
     } else {
       const video = document.createElement("video");
       const sourceVideo = document.createElement("source");
@@ -99,39 +104,73 @@ export async function CreatPhotographerGallery(photos) {
       video.setAttribute("width", "300px");
       video.setAttribute("autoplay", true);
       video.appendChild(sourceVideo);
-      pictureCard.appendChild(video);
+      pictureCardContent.appendChild(video);
     }
 
     // Display picture name
 
+    const pictureCardInfo = document.createElement("div");
+    pictureCardInfo.classList.add("pictureCard_info");
+    pictureCard.appendChild(pictureCardInfo);
+
     const pictureName = document.createElement("div");
 
     pictureName.textContent = `${img.title}`;
-    pictureCard.appendChild(pictureName);
+    pictureCardInfo.appendChild(pictureName);
 
     const likes = document.createElement("div");
 
     likes.textContent = `${img.likes}`;
-    pictureCard.appendChild(likes);
+    pictureCardInfo.appendChild(likes);
+
+    const heart = document.createElement("i");
+
+    heart.classList.add("fa-regular");
+    heart.classList.add("fa-heart");
+    pictureCardInfo.appendChild(heart);
+
+    let curentLikes = img.likes;
+
+    heart.addEventListener("click", function() {
+      heart.classList.remove("fa-regular");
+      heart.classList.add("fa-solid");
+      ++img.likes;
+    });
 
     pos++;
   });
 
   // *********************************Carrousel  *********************************
 
-  document.querySelectorAll(".pictureCard").forEach((element) => {
+  document.querySelectorAll(".pictureCard_content").forEach((element) => {
     element.addEventListener("click", function(event) {
       event.stopPropagation();
       event.preventDefault();
 
       // ouvrir la caroussel avec la position disponible sur la carte
 
+      content.style.display = "none";
+
+      const Carrousel = document.querySelector("#Carrousel");
+
+      const selected_menu = document.createElement("div");
+      selected_menu.classList.add("selected_menu");
+      Carrousel.appendChild(selected_menu);
+
+      const precedent = document.createElement("div");
+      precedent.classList.add("precedent");
+      precedent.textContent = "<";
+      selected_menu.appendChild(precedent);
+
+      const suivant = document.createElement("div");
+      suivant.classList.add("suivant");
+      suivant.textContent = ">";
+      selected_menu.appendChild(suivant);
+
       if (document.querySelector(".slider") != null)
         document.querySelector(".slider").remove();
 
       let picturepos = element.dataset.pos;
-
-      const Carrousel = document.querySelector("#Carrousel");
 
       const slider = document.createElement("div");
       slider.classList.add("slider");
@@ -154,9 +193,9 @@ export async function CreatPhotographerGallery(photos) {
 
       img__slider[picturepos].classList.add("active");
 
-      // Controle du Slider
+      // -------------Controle du Slider------------
       // set up button next
-      let suivant = document.querySelector(".suivant");
+
       suivant.addEventListener("click", function() {
         etape++;
         if (etape >= img__slider.length) {
@@ -172,7 +211,6 @@ export async function CreatPhotographerGallery(photos) {
 
       // // set up button previous
 
-      let precedent = document.querySelector(".precedent");
       precedent.addEventListener("click", function() {
         etape--;
         if (etape < 0) {

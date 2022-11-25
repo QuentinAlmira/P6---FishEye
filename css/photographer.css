@@ -1,4 +1,20 @@
 /*Photographe page*/
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border-style: none;
+}
+
+#content {
+  padding: 2em;
+}
+
+header {
+  margin-top: 0;
+}
 
 .photographer-page {
   display: flex;
@@ -11,7 +27,7 @@
 }
 
 .photographer-page__header {
-  width: 90%;
+  width: 100%;
   background-color: #fafafa;
   display: flex;
   flex-direction: row;
@@ -23,6 +39,10 @@
   color: #d3573c;
   font-size: 30px;
   margin: 0;
+}
+
+.photographer-page__header-right {
+  padding: 2em;
 }
 
 .photographer-page__header img {
@@ -40,6 +60,13 @@
   background-color: #901c1c;
   color: white;
   border-color: #901c1c;
+  border-radius: 10px;
+}
+
+.modalButton {
+  height: 3rem;
+  background-color: #901c1c;
+  color: #fafafa;
   border-radius: 10px;
 }
 
@@ -144,26 +171,9 @@ form input {
 
 /* Gallery */
 
-/* Sort */
+/*--------------------------------------------------------------------------------------*/
 
-.sorting {
-  height: 3rem;
-  width: 100%;
-  background-color: #db8876;
-  display: flex;
-  flex-direction: row;
-}
-
-.sortingByName {
-  height: 2rem;
-  cursor: pointer;
-}
-
-.sortingByDate {
-  height: 2rem;
-  cursor: pointer;
-  margin-left: 50px;
-}
+/*--------------------------------------------------------------------------------------*/
 
 .photographer-Gallery {
   height: auto;
@@ -174,11 +184,12 @@ form input {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-evenly;
   margin-top: 3em;
   gap: 5em;
 }
 
-.pictureCard {
+.pictureCard_content {
   height: 300px;
   width: 200px;
   display: flex;
@@ -187,7 +198,7 @@ form input {
   cursor: pointer;
 }
 
-.photographer-Portfolio img video {
+.photographer-Portfolio img {
   border-radius: 0.6rem;
   width: 100%;
   height: 100%;
@@ -195,10 +206,27 @@ form input {
   cursor: pointer;
 }
 
+.pictureCard_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fa-heart {
+  color: #901c1c;
+}
+
 /* Carrousel */
 
+.interactiv_content {
+  height: 100vh;
+}
+
 .Carrousel {
+  height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .slider {
@@ -207,7 +235,7 @@ form input {
 }
 
 .slider img {
-  height: 250px;
+  height: 100%;
   width: 100%;
   opacity: 0;
   transition: opacity 0.5s;
@@ -221,38 +249,31 @@ form input {
   opacity: 1;
 }
 
-/* .suivant,
-.precedent {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  color: red;
-  position: absolute;
-  font-size: 3rem;
-  font-weight: bold;
-  cursor: pointer;
-  top: -50%;
-  z-index: 5;
-} */
-
 .selected_menu {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: row;
-  align-content: center;
-  color: white;
-  background-color: #d3573c;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
 }
+
 .suivant {
   height: 50px;
   display: flex;
   font-size: 3rem;
+  font-weight: bolder;
+  color: #901c1c;
+  cursor: pointer;
 }
 
 .precedent {
-  transform: rotate(180deg);
   display: flex;
   font-size: 3rem;
+  color: #901c1c;
+  font-weight: bolder;
+  cursor: pointer;
 }
 
 .error {
