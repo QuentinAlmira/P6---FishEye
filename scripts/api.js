@@ -1,12 +1,11 @@
-/* charger l'id depuis l'URL */
-const lien = window.location.search;
-console.log(lien);
-const urlParams = new URLSearchParams(lien);
-console.log(urlParams);
-const id = urlParams.get("id");
-console.log(id);
+// ----------->APi's pour récuperer les datas du Json<-----------
 
-/*Recuperer les data photographes dans le json*/
+/************* Recuperer l'id du photographer depuis l'URL *************/
+const lien = window.location.search;
+const urlParams = new URLSearchParams(lien);
+const id = urlParams.get("id");
+
+/*************Recuperer les data Photographer dans le json*************/
 async function getPhotographers() {
   let photographers = [];
 
@@ -25,7 +24,7 @@ async function getPhotographers() {
   return { photographers: [...photographers] };
 }
 
-/*Recuperer les data Media dans le json*/
+/*************Recuperer les data Media dans le json*************/
 async function getMedia() {
   let media = [];
 
@@ -42,5 +41,3 @@ async function getMedia() {
     });
   return { media: [...media] };
 }
-
-// filtrer les Media par photographers

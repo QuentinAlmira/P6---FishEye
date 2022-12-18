@@ -1,4 +1,36 @@
-/*Recuperer les data photographes dans le json*/
+// ----------->Affichage des elements de la page index<-----------
+
+// Création du Header
+
+const content = document.querySelector("#Content");
+
+const indexHeader = document.createElement("header");
+content.appendChild(indexHeader);
+
+const headerLink = document.createElement("a");
+headerLink.setAttribute("href", "/index.html");
+headerLink.classList.add("header__link");
+headerLink.setAttribute("aria-label", "Recharger la page");
+indexHeader.appendChild(headerLink);
+
+const headerLinkLogo = document.createElement("img");
+headerLinkLogo.setAttribute("src", "./assets/images/logo.png");
+headerLinkLogo.setAttribute("alt", "Page d'acceuil Fisheye");
+headerLinkLogo.classList.add("header__logo");
+headerLink.appendChild(headerLinkLogo);
+
+const headerTitle = document.createElement("h1");
+headerTitle.classList.add("header__title");
+headerTitle.textContent = "Nos photographes";
+indexHeader.appendChild(headerTitle);
+
+// Création du Main
+const indexMain = document.createElement("main");
+indexMain.classList.add("photographer_section");
+indexMain.setAttribute("id", "main");
+content.appendChild(indexMain);
+
+/*************Recuperer les data photographes dans le json*************/
 
 async function getPhotographers() {
   let photographers = [];
@@ -14,18 +46,22 @@ async function getPhotographers() {
       );
       console.log(error);
     });
-  console.log(photographers);
   return { photographers: [...photographers] };
 }
 
-/*----------------------------*/
-
+// ************Création des élements de la page index************
 async function displayData(photographers) {
   const photographersSection = document.querySelector("#main");
-
+  // Boucle pour afficher les portraits et informations des photographes
   photographers.forEach((photographer) => {
     const link = document.createElement("a");
     link.setAttribute("href", `/photographer.html?id=${photographer.id}`);
+    link.classList.add("photographer_card");
+    link.setAttribute("role", "link");
+    link.setAttribute(
+      "aria-label",
+      `ouvrir la page du photographe ${photographer.name}`
+    );
 
     const article = document.createElement("article");
 
@@ -35,6 +71,10 @@ async function displayData(photographers) {
     pPicture.setAttribute(
       "src",
       `./assets/photographersID/${photographer.portrait}`
+    );
+    pPicture.setAttribute(
+      "alt",
+      `portrait du photographe ${photographer.name} `
     );
     article.appendChild(pPicture);
 
@@ -51,21 +91,22 @@ async function displayData(photographers) {
 
     // photographer tagline
     const ptagLine = document.createElement("p");
+    ptagLine.classList.add("card__tagline");
     ptagLine.textContent = `${photographer.tagline}`;
     article.appendChild(ptagLine);
 
     // photographer price
     const pPrice = document.createElement("p");
-    pPrice.textContent = `${photographer.price}€`;
+    pPrice.classList.add("card__price");
+    pPrice.textContent = `${photographer.price}€/jour`;
     article.appendChild(pPrice);
 
     link.appendChild(article);
-    // Article closing
     photographersSection.appendChild(link);
   });
 }
 
-// Afficher les data
+// ************Afficher les datas************
 
 async function init() {
   // Récupère les datas des photographes

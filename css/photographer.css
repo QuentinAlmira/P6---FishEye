@@ -1,30 +1,129 @@
 /*Photographe page*/
+
 body {
+  width: auto;
   margin: 0;
   padding: 0;
 }
 
 button {
   border-style: none;
+  background-color: #fafafa;
+  padding: 0;
 }
 
-#content {
-  padding: 2em;
+main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
 }
 
-header {
-  margin-top: 0;
+.header__link__page img {
+  height: 2rem;
+}
+
+.header__link__page {
+  padding-left: 5%;
 }
 
 .photographer-page {
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.header__link__page img {
+
+/* Sort */
+
+.menu_sort {
+  height: auto;
   width: 100%;
-  padding-left: 50px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  align-items: center;
 }
+
+.menuSort_title {
+  margin-right: 30px;
+}
+
+/* ---------------------------- */
+
+#menu {
+  height: 50px;
+  background-color: #901c1c;
+  color: antiquewhite;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.menuSort_title {
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.menu_current_choice {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding-left: 15px;
+  cursor: pointer;
+}
+
+.menu_current_choice::after {
+  text-align: center;
+  width: 50px;
+  content: ">";
+  color: white;
+  transform: rotate(90deg);
+}
+
+.current_choice_chevron {
+  transform: rotate(90deg);
+}
+
+.menu_other_choice {
+  width: 140px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2200000;
+  background-color: #901c1c;
+  color: antiquewhite;
+  display: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.choice {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.choice.chevron::after {
+  text-align: center;
+  width: 50px;
+  content: ">";
+  color: white;
+  transform: rotate(270deg);
+}
+
+.choice.no-chevron {
+  border-top: 0.1rem solid white;
+}
+
+/* Informations du photographe / bouton modal */
 
 .photographer-page__header {
   width: 100%;
@@ -33,6 +132,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 30px;
 }
 
 .photographer-page__header h2 {
@@ -47,6 +147,7 @@ header {
 
 .photographer-page__header img {
   clip-path: ellipse(50% 50%);
+  object-fit: cover;
   height: 150px;
   width: 150px;
 }
@@ -64,16 +165,12 @@ header {
 }
 
 .modalButton {
-  height: 3rem;
+  width: 150px;
+  height: 50px;
   background-color: #901c1c;
   color: #fafafa;
   border-radius: 10px;
-}
-
-.photographer-page__select-option {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
+  cursor: pointer;
 }
 
 .photographer-page__media {
@@ -85,95 +182,224 @@ header {
   height: 200px;
 }
 
-/*modal*/
+/* Modal************ */
 
-#contact_modal {
-  display: none;
+/*modal - Frame*/
+
+.modal_frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 }
 
-.photograph-header {
-  background-color: #fafafa;
-  height: 300px;
-  margin: 0 100px;
+#contentModal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.contact_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  padding: 11px;
-  width: 170px;
-  height: 70px;
-  border: none;
-  background-color: #901c1c;
-  border-radius: 5px;
+.close--cross {
+  font-size: 2rem;
+  position: absolute;
+  background-color: white;
+  color: #901c1c;
+  top: 5%;
+  right: 5%;
+  z-index: 20;
   cursor: pointer;
 }
 
-.modal {
-  border-radius: 5px;
-  background-color: #db8876;
-  width: 50%;
+/* Carrousel */
+
+.Carrousel {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 35px;
-  margin: auto;
-  z-index: 10;
-  left: 25%;
+}
 
-  top: 0;
+.slider {
+  width: 80%;
+  height: 90%;
+}
+
+.slider_picture_container {
+  position: relative;
+  height: 95%;
+  z-index: 55555;
+}
+
+.slider img {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+  object-fit: cover;
+}
+
+.slider video {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+  object-fit: cover;
+}
+
+.slider img.active {
   height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+.slider video.active {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+.selected_menu {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  z-index: 10;
+  top: 45%;
+}
+
+.suivant {
+  display: flex;
+  font-size: 3rem;
+  font-weight: bolder;
+  color: #901c1c;
+  text-align: center;
+  cursor: pointer;
+}
+
+.precedent {
+  display: flex;
+  font-size: 3rem;
+  color: #901c1c;
+  font-weight: bolder;
+  cursor: pointer;
+  text-align: center;
+}
+
+.slider_picture_name_container {
+  position: relative;
+  width: 80%;
+  height: 5%;
+  z-index: 5555555;
+}
+
+.slider_picture_name {
+  position: absolute;
+  height: 0;
+  top: 20%;
+  opacity: 0;
+}
+
+.slider_picture_name.active {
+  opacity: 1;
+  font-size: 1rem;
+  color: #901c1c;
+}
+
+/*Modal contact*/
+
+.modal__form__form-content {
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 45%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  padding-top: 0;
+  z-index: 10;
+  margin-top: 50px;
+}
+
+.close--cross.contact {
+  height: 50px;
+  font-size: 2rem;
+  position: absolute;
+  background-color: #db8876;
+  color: #fafafa;
+  top: 52px;
+  right: 28%;
+  z-index: 20;
+  cursor: pointer;
 }
 
 .modal header {
   justify-content: space-between;
+  height: auto;
   width: 100%;
 }
 
-.modal header img {
-  cursor: pointer;
-}
-
-.modal header h2 {
-  font-size: 64px;
+.modal_header_contact {
+  font-size: 2.5rem;
   font-weight: normal;
-  text-align: center;
 }
 
-form {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
+.modal_header_name {
+  font-size: 2.5rem;
+  font-weight: normal;
 }
 
 form label {
+  width: 100%;
   color: #312e2e;
-  font-size: 36px;
+  font-size: 1.5rem;
 }
 
 form div {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
 }
 
 form input {
   width: 100%;
-  height: 68px;
+  height: 5%;
   border: none;
   border-radius: 5px;
 }
 
-/* Gallery */
+.modal__form__form-content__input--message {
+  width: 100%;
+  height: 30%;
+}
 
-/*--------------------------------------------------------------------------------------*/
+#submitContact {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-/*--------------------------------------------------------------------------------------*/
+/* Gallery du photographe*/
 
 .photographer-Gallery {
   height: auto;
@@ -184,18 +410,31 @@ form input {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 3em;
-  gap: 5em;
+  gap: 2em;
+}
+
+.pictureCard {
+  width: calc(33% - 2.5em);
 }
 
 .pictureCard_content {
-  height: 300px;
-  width: 200px;
+  height: 90%;
   display: flex;
   flex-direction: column;
   color: #901c1c;
   cursor: pointer;
+}
+
+.pictureCard_content:hover {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  color: #901c1c;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: 0.2s ease-in-out;
 }
 
 .photographer-Portfolio img {
@@ -206,77 +445,98 @@ form input {
   cursor: pointer;
 }
 
+.photographer-Portfolio video {
+  border-radius: 0.6rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
 .pictureCard_info {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.picture_name {
+  display: flex;
+  align-items: flex-start;
+  width: 80%;
+  height: 100%;
+  color: #901c1c;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+}
+
+.picture_popularity {
+  width: 20%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.picture_popularity i {
+  font-size: 1rem;
+  padding-top: 1.2px;
+  cursor: pointer;
 }
 
 .fa-heart {
   color: #901c1c;
 }
 
-/* Carrousel */
+/* Animation du coeur */
 
-.interactiv_content {
-  height: 100vh;
+.fa-heart.fa-solid {
+  transform: scale(1);
+  animation: pulse 0.5s;
 }
 
-.Carrousel {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+  }
+
+  70% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
-.slider {
-  width: 100%;
-  position: relative;
-}
-
-.slider img {
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 0.5s;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.slider img.active {
-  object-fit: cover;
-  opacity: 1;
-}
-
-.selected_menu {
-  width: 90%;
+.box_like_price {
+  height: 3rem;
+  width: 200px;
+  position: fixed;
+  bottom: 0;
+  right: 5%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  position: absolute;
-  z-index: 10;
-  top: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: #d3573c;
+  border-radius: 10px 10px 0px 0px;
 }
 
-.suivant {
-  height: 50px;
+.likes_container {
   display: flex;
-  font-size: 3rem;
-  font-weight: bolder;
-  color: #901c1c;
-  cursor: pointer;
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.precedent {
-  display: flex;
-  font-size: 3rem;
-  color: #901c1c;
-  font-weight: bolder;
-  cursor: pointer;
+.fa-heart.total {
+  color: black;
 }
 
-.error {
-  background-color: #901c1c;
-  color: green;
+.total_price {
+  width: 50%;
 }

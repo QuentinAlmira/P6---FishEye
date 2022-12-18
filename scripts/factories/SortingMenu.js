@@ -1,3 +1,4 @@
+// ----------->Creation des elements du trie par Nom/Date/popularité<-----------
 import { CreatPhotographerGallery } from "../factories/photographerFactory.js";
 
 export function sortingMenu(photos) {
@@ -17,8 +18,10 @@ export function sortingMenu(photos) {
 
   // Boutton choix trie
 
-  const menuSortButton = document.createElement("div");
+  const menuSortButton = document.createElement("button");
   menuSortButton.setAttribute("id", "menu");
+  menuSortButton.setAttribute("aria-controls", "options du filtres");
+  menuSortButton.setAttribute("aria-expanded", "false");
   menuSort.appendChild(menuSortButton);
 
   // Menu selectioné
@@ -26,7 +29,7 @@ export function sortingMenu(photos) {
   const currentChoice = document.createElement("div");
   currentChoice.classList.add("menu_current_choice");
   menuSortButton.appendChild(currentChoice);
-  currentChoice.textContent = "Current Choice";
+  currentChoice.textContent = "Popularité";
   currentChoice.addEventListener("click", function() {
     otherChoice.style.display = "block";
   });
@@ -40,6 +43,7 @@ export function sortingMenu(photos) {
   const menuSort1 = document.createElement("div");
   otherChoice.appendChild(menuSort1);
   menuSort1.classList.add("choice");
+  menuSort1.classList.add("chevron");
   menuSort1.textContent = "Popularité";
 
   menuSort1.addEventListener("click", function(event) {
@@ -56,6 +60,7 @@ export function sortingMenu(photos) {
   const menuSort2 = document.createElement("div");
   otherChoice.appendChild(menuSort2);
   menuSort2.classList.add("choice");
+  menuSort2.classList.add("no-chevron");
   menuSort2.textContent = "Name";
   // Afficher la gallerie du photographe / Trier par nom
   menuSort2.addEventListener("click", function(event) {
@@ -69,6 +74,7 @@ export function sortingMenu(photos) {
   // Date
   const menuSort3 = document.createElement("div");
   menuSort3.classList.add("choice");
+  menuSort3.classList.add("no-chevron");
   otherChoice.appendChild(menuSort3);
   menuSort3.textContent = "Date";
   // Afficher la gallerie du photographe / Trier par date
@@ -81,7 +87,7 @@ export function sortingMenu(photos) {
   });
 }
 
-// Filtres de la gallerie photos
+//************ Filtres de la gallerie photos************
 
 export function sortByName(photos) {
   photos.sort(function(a, b) {

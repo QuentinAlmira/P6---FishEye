@@ -1,85 +1,96 @@
 @import url("photographer.css");
-
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
 }
 
-p {
-  margin: 0;
-}
+/* header */
 
 header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-content: space-between;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
   margin-top: 40px;
-  height: 90px;
 }
 
-header img {
-  height: 2em;
-  padding-left: 30px;
+.header__link img {
+  height: 2.5rem;
+}
+
+.header__link {
+  padding-left: 5%;
+  height: 50px;
 }
 
 header h1 {
-  height: 2em;
+  height: 50px;
+  padding-right: 5%;
   color: #901c1c;
   margin: 0px;
-  padding-right: 30px;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 50px;
-  margin-left: 100px;
 }
 
 /* Photographer section */
 
 .photographer_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 30px;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 5%;
 }
 
-.photographer_section p {
+.photographer_section a {
+  width: calc(33% - 50px);
+  height: auto;
+  text-decoration: none;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
-  font-size: 0.8em;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 /* Photographer card */
 
 .photographer_section article {
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 7px;
+  align-items: center;
+}
+
+.photographer_section p {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0.8em;
+  margin: 5px;
+}
+
+.card__location {
+  color: #d3573c;
+}
+
+.card__price {
+  color: black;
+}
+
+.card__tagline {
+  color: black;
 }
 
 .photographer_section article h2 {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: center;
   color: #d3573c;
   font-size: 30px;
-  margin: 0;
-}
-
-.photographer_section article a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .photographer_section article img {
@@ -89,8 +100,13 @@ nav {
   object-fit: cover;
 }
 
-.card__location {
-  color: #d3573c;
+.photographer_section article img:hover {
+  height: 200px;
+  width: 200px;
+  clip-path: ellipse(50% 50%);
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: 0.2s ease-in-out;
 }
 
 .card__tags-container {

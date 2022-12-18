@@ -1,9 +1,14 @@
+// ----------->Creation des elements de la page photographer<-----------
+
+var selectedPhotographer = null;
+
+// ************Photographer information card************
 export async function displayHeader(photographer) {
+  selectedPhotographer = photographer;
   const photographershead = document.querySelector("#photographer-page");
 
+  // Création des éléments du header
   const pheader = document.createElement("section");
-
-  // photographer informations
 
   photographershead.appendChild(pheader);
   pheader.classList.add("photographer-page__header");
@@ -18,10 +23,9 @@ export async function displayHeader(photographer) {
 
   const cardName = document.createElement("h2");
   cardName.classList.add("card__name");
+  cardName.setAttribute("id", "name");
   pHeaderLeftinfo.appendChild(cardName);
   cardName.textContent = `${photographer.name}`;
-
-  console.log(photographer.name);
 
   const cardLocation = document.createElement("p");
   cardLocation.classList.add("card__location");
@@ -33,17 +37,21 @@ export async function displayHeader(photographer) {
   pHeaderLeftinfo.appendChild(cardTagline);
   cardTagline.textContent = `${photographer.tagline}`;
 
-  // photographer contact button
-
   const pContact = document.createElement("button");
   pContact.classList.add("modalButton");
   pheader.appendChild(pContact);
   pContact.textContent = "Contactez-moi";
-  //activer l'action open lors du click
-  pContact.addEventListener("click", launchModal);
+  pContact.setAttribute("aria-label", "Ouvrir la modal de contact");
 
-  //   // photographer Id picture
+  //Ouverture de la modal contact
+  pContact.addEventListener("click", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
 
+    launchModal("contact", photographer, null);
+  });
+
+  // Photographer Id picture
   const pID = document.createElement("div");
   pID.classList.add("photographer-page__header-right");
   pheader.appendChild(pID);
@@ -53,11 +61,11 @@ export async function displayHeader(photographer) {
     "src",
     `./assets/photographersID/${photographer.portrait}`
   );
+  idPicture.setAttribute("alt", `Portrait de ${photographer.name}`);
   pID.appendChild(idPicture);
 }
 
-// -------------------------------------Gallery------------------------------------------------------
-
+// ************Gallery************
 export async function CreatPhotographerGallery(photos) {
   const photographershead = document.querySelector("#photographer-page");
 
@@ -73,11 +81,12 @@ export async function CreatPhotographerGallery(photos) {
   pPortfolio.classList.add("photographer-Portfolio");
 
   let pos = 0;
+  let totalLikes = 0;
 
   photos.forEach((img) => {
+    // Boucle pour creer les elements de la gallerie
     const pictureCard = document.createElement("div");
     pictureCard.classList.add("pictureCard");
-    // pictureCard.setAttribute("data-pos", pos);
     pPortfolio.appendChild(pictureCard);
 
     const pictureCardContent = document.createElement("div");
@@ -85,12 +94,15 @@ export async function CreatPhotographerGallery(photos) {
     pictureCardContent.setAttribute("data-pos", pos);
     pictureCard.appendChild(pictureCardContent);
 
+    // Insertion des photos dans la gallerie du photographe en fonction de leur format images/videos
     if (img.image !== undefined) {
       const pPicture = document.createElement("img");
       pPicture.setAttribute(
         "src",
         `./assets/Portfolio/${img.photographerId}/${img.image}`
       );
+      pPicture.setAttribute("alt", `${img.description}`);
+      pPicture.setAttribute("aria-label", "Ouvrir le carrousel media");
       pictureCardContent.appendChild(pPicture);
     } else {
       const video = document.createElement("video");
@@ -102,127 +114,152 @@ export async function CreatPhotographerGallery(photos) {
       );
       sourceVideo.setAttribute("type", "video/mp4");
       video.setAttribute("width", "300px");
+      video.setAttribute("height", "100%");
       video.setAttribute("autoplay", true);
+      video.setAttribute("loop", true);
       video.appendChild(sourceVideo);
       pictureCardContent.appendChild(video);
     }
 
-    // Display picture name
+    // Ouverture de la modal carrousel :
+    pictureCardContent.addEventListener("click", function(event) {
+      event.stopPropagation();
+      event.preventDefault();
 
+      launchModal("carrousel", photos, pictureCardContent.dataset.pos);
+    });
+
+    // Affichage du nom de chaque photo
     const pictureCardInfo = document.createElement("div");
     pictureCardInfo.classList.add("pictureCard_info");
     pictureCard.appendChild(pictureCardInfo);
 
     const pictureName = document.createElement("div");
-
+    pictureName.classList.add("picture_name");
     pictureName.textContent = `${img.title}`;
     pictureCardInfo.appendChild(pictureName);
 
+    // Création des likes et de leur compteur
+
+    const picturePopularity = document.createElement("div");
+    picturePopularity.classList.add("picture_popularity");
+    pictureCardInfo.appendChild(picturePopularity);
+
     const likes = document.createElement("div");
-
-    likes.textContent = `${img.likes}`;
-    pictureCardInfo.appendChild(likes);
-
-    const heart = document.createElement("i");
-
-    heart.classList.add("fa-regular");
-    heart.classList.add("fa-heart");
-    pictureCardInfo.appendChild(heart);
+    likes.classList.add("picture_like");
 
     let curentLikes = img.likes;
+    likes.textContent = `${curentLikes}`;
+    likes.setAttribute("aria-label", `Nombre de like ${curentLikes}`);
+    picturePopularity.appendChild(likes);
 
-    heart.addEventListener("click", function() {
-      heart.classList.remove("fa-regular");
-      heart.classList.add("fa-solid");
-      ++img.likes;
+    const buttonLike = document.createElement("button");
+    buttonLike.classList.add("like_button");
+    buttonLike.setAttribute("aria-label", "aimer ce contenu");
+    picturePopularity.appendChild(buttonLike);
+
+    const heart = document.createElement("i");
+    heart.classList.add("fa-regular");
+    heart.classList.add("fa-heart");
+    buttonLike.appendChild(heart);
+
+    document.getElementById("name").textContent;
+
+    // Managment du compteur de likes
+    heart.addEventListener("click", function(event) {
+      if (heart.className.includes("fa-regular")) {
+        heart.classList.remove("fa-regular");
+        heart.classList.add("fa-solid");
+        curentLikes++;
+        totalLikes++;
+      } else {
+        heart.classList.remove("fa-solid");
+        heart.classList.add("fa-regular");
+        curentLikes--;
+        totalLikes--;
+      }
+
+      likes.textContent = curentLikes;
+      likes.setAttribute("aria-label", `${curentLikes}`);
+      document.getElementById("total_likes").textContent = totalLikes;
     });
 
+    totalLikes += curentLikes;
     pos++;
   });
-
-  // *********************************Carrousel  *********************************
-
-  document.querySelectorAll(".pictureCard_content").forEach((element) => {
-    element.addEventListener("click", function(event) {
-      event.stopPropagation();
-      event.preventDefault();
-
-      // ouvrir la caroussel avec la position disponible sur la carte
-
-      content.style.display = "none";
-
-      const Carrousel = document.querySelector("#Carrousel");
-
-      const selected_menu = document.createElement("div");
-      selected_menu.classList.add("selected_menu");
-      Carrousel.appendChild(selected_menu);
-
-      const precedent = document.createElement("div");
-      precedent.classList.add("precedent");
-      precedent.textContent = "<";
-      selected_menu.appendChild(precedent);
-
-      const suivant = document.createElement("div");
-      suivant.classList.add("suivant");
-      suivant.textContent = ">";
-      selected_menu.appendChild(suivant);
-
-      if (document.querySelector(".slider") != null)
-        document.querySelector(".slider").remove();
-
-      let picturepos = element.dataset.pos;
-
-      const slider = document.createElement("div");
-      slider.classList.add("slider");
-      Carrousel.appendChild(slider);
-
-      photos.forEach((img) => {
-        const pPicture = document.createElement("img");
-        pPicture.setAttribute(
-          "src",
-          `./assets/Portfolio/${img.photographerId}/${img.image}`
-        );
-        pPicture.classList.add("img__slider");
-        slider.appendChild(pPicture);
-      });
-
-      console.log(picturepos);
-
-      let img__slider = document.getElementsByClassName("img__slider");
-      let etape = 0;
-
-      img__slider[picturepos].classList.add("active");
-
-      // -------------Controle du Slider------------
-      // set up button next
-
-      suivant.addEventListener("click", function() {
-        etape++;
-        if (etape >= img__slider.length) {
-          etape = 0;
-        }
-
-        for (let i = 0; i < img__slider.length; i++) {
-          img__slider[i].classList.remove("active");
-        }
-
-        img__slider[etape].classList.add("active");
-      });
-
-      // // set up button previous
-
-      precedent.addEventListener("click", function() {
-        etape--;
-        if (etape < 0) {
-          etape = img__slider.length - 1;
-        }
-
-        for (let i = 0; i < img__slider.length; i++) {
-          img__slider[i].classList.remove("active");
-        }
-
-        img__slider[etape].classList.add("active");
-      });
-    });
-  });
+  //Affichage de la frame statique Like/Prix
+  CreatPhotographerCounter(totalLikes, selectedPhotographer.price);
 }
+
+// Création de la frame statique Like/Prix
+function CreatPhotographerCounter(totalLikes, prix) {
+  const photographershead = document.querySelector("#photographer-page");
+
+  if (document.querySelector(".total_likes") != null)
+    document.querySelector(".total_likes").remove();
+
+  const boxLikesPrices = document.createElement("div");
+  boxLikesPrices.classList.add("box_like_price");
+  boxLikesPrices.setAttribute("id", "box_like_price");
+  photographershead.appendChild(boxLikesPrices);
+
+  const likesContainer = document.createElement("div");
+  likesContainer.classList.add("likes_container");
+  boxLikesPrices.appendChild(likesContainer);
+
+  const LikesCounter = document.createElement("div");
+  LikesCounter.classList.add("total_likes");
+  LikesCounter.setAttribute("id", "total_likes");
+  likesContainer.appendChild(LikesCounter);
+  LikesCounter.textContent = `${totalLikes}`;
+
+  const heartTotal = document.createElement("i");
+  heartTotal.classList.add("fa-heart");
+  heartTotal.classList.add("fa-solid");
+  heartTotal.classList.add("total");
+  likesContainer.appendChild(heartTotal);
+
+  const totalPrice = document.createElement("div");
+  totalPrice.classList.add("total_price");
+  totalPrice.textContent = `${prix}/jour`;
+  boxLikesPrices.appendChild(totalPrice);
+}
+
+// fonction factory
+
+// class content {
+//   selectOutput() {
+//     const test = document.querySelector("#content");
+//     let divtest = document.createElement("div");
+//     test.appendChild(divtest);
+//   }
+// }
+
+// class image extends content {
+//   selectOutput() {
+//     const pPicture = document.createElement("img");
+//     pPicture.setAttribute(
+//       "src",
+//       `./assets/Portfolio/${img.photographerId}/${img.image}`
+//     );
+//   }
+// }
+
+// class video extends content {
+//   selectOutput() {
+//     console.log("whoaf");
+//   }
+// }
+
+// function factory(type) {
+//   switch (type) {
+//     case "image":
+//       return new image();
+
+//     case "video":
+//       return new video();
+//   }
+// }
+
+// const Pics = factory("image");
+// Pics.selectOutput();
