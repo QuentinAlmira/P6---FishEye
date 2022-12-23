@@ -56,10 +56,10 @@ async function displayData(photographers) {
   photographers.forEach((photographer) => {
     const link = document.createElement("a");
 
-    let tabPath = window.location.pathname.split("/");
+    let tab = window.location.pathname.split("/");
     let url = "/";
-    for (let i = 0; i < tabPath - 1; i++) {
-      url += tabPath[i] + "/";
+    for (let i = 0; i < tab - 1; i++) {
+      url += tab[i] + "/";
     }
     console.log("test" + url);
     link.setAttribute("href", url + `photographer.html?id=${photographer.id}`);
