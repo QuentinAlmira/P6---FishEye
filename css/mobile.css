@@ -1,15 +1,11 @@
 /************** Breakpoint 768px **************/
 
-@media screen and (min-width: 1024px) {
-  /* index */
-
-  /* Photographer */
-
+/* @media screen and (min-width: 1025px) {
   .pictureCard {
     width: calc(25% - 2em);
     height: 350px;
   }
-}
+} */
 
 /************** Breakpoint 768px **************/
 

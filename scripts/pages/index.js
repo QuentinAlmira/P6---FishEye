@@ -55,7 +55,14 @@ async function displayData(photographers) {
   // Boucle pour afficher les portraits et informations des photographes
   photographers.forEach((photographer) => {
     const link = document.createElement("a");
-    link.setAttribute("href", `/photographer.html?id=${photographer.id}`);
+
+    let tabPath = window.location.pathname.split("/");
+    let url = "/";
+    for (let i = 0; i < tabPath - 1; i++) {
+      url += tabPath[i] + "/";
+    }
+    console.log("test" + url);
+    link.setAttribute("href", url + `photographer.html?id=${photographer.id}`);
     link.classList.add("photographer_card");
     link.setAttribute("role", "link");
     link.setAttribute(

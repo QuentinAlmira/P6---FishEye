@@ -29,6 +29,7 @@ headerLink.appendChild(headerLinkLogo);
 const photographerMain = document.createElement("main");
 photographerMain.classList.add("photographer_main");
 photographerMain.setAttribute("id", "main");
+photographerMain.setAttribute("aria-hidden", "false");
 content.appendChild(photographerMain);
 
 const photographerPage = document.createElement("div");

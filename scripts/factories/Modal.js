@@ -85,8 +85,7 @@ function actionCaroussel(pos) {
 
   // -------------Controle du Slider------------
   // set up button next
-
-  suivant.addEventListener("click", function() {
+  function sliderNext() {
     etape++;
 
     if (etape >= img__slider.length) {
@@ -100,10 +99,19 @@ function actionCaroussel(pos) {
 
     img__slider[etape].classList.add("active");
     img__name[etape].classList.add("active");
+  }
+  // Afficher l'image suivante du slider
+  // Avec le clique souris
+  suivant.addEventListener("click", sliderNext);
+  // Avec la flèche droit du clavier
+  document.addEventListener("keydown", (eKeyRight) => {
+    if (eKeyRight.key === "ArrowRight") {
+      sliderNext();
+    }
   });
-  // // set up button previous
 
-  precedent.addEventListener("click", function() {
+  // // set up button previous
+  function sliderPrevious() {
     etape--;
     if (etape < 0) {
       etape = img__slider.length - 1;
@@ -116,6 +124,17 @@ function actionCaroussel(pos) {
 
     img__slider[etape].classList.add("active");
     img__name[etape].classList.add("active");
+  }
+  // Afficher l'image précedente du slider
+  // Avec le clique souris
+  precedent.addEventListener("click", function() {
+    sliderPrevious();
+  });
+  // Avec la flèche droit du clavier
+  document.addEventListener("keydown", (eKeyLeft) => {
+    if (eKeyLeft.key === "ArrowLeft") {
+      sliderPrevious();
+    }
   });
 }
 
@@ -129,6 +148,7 @@ function createContentContact() {
   mForm.setAttribute("method", "get");
   mForm.classList.add("modal__form__form-content");
   mForm.setAttribute("aria-label", "formulaire de contact");
+  mForm.setAttribute("tabindex", "0");
   modalContactFrame.appendChild(mForm);
 
   const modalHeader = document.createElement("div");
@@ -156,6 +176,7 @@ function createContentContact() {
   firstNameInput.setAttribute("type", "text");
   firstNameInput.setAttribute("id", "firstNameInput");
   firstNameInput.setAttribute("name", "prénom");
+  firstNameInput.setAttribute("aria-labelledby", "prénom");
   mForm.appendChild(firstNameInput);
 
   const lastNameLabel = document.createElement("label");
@@ -169,6 +190,7 @@ function createContentContact() {
   lastNameInput.setAttribute("id", "lastNameInput");
   lastNameInput.setAttribute("type", "text");
   lastNameInput.setAttribute("name", "Nom");
+  lastNameInput.setAttribute("aria-labelledby", "nom");
   mForm.appendChild(lastNameInput);
 
   const emailLabel = document.createElement("label");
@@ -183,6 +205,7 @@ function createContentContact() {
   emailInput.setAttribute("id", "emailInput");
   emailInput.setAttribute("type", "mail");
   emailInput.setAttribute("name", "email");
+  emailInput.setAttribute("aria-labelledby", "e-mail");
   mForm.appendChild(emailInput);
 
   const messageLabel = document.createElement("label");
@@ -197,6 +220,7 @@ function createContentContact() {
   mTextArea.setAttribute("id", "messageInput");
   mTextArea.setAttribute("name", "message");
   mTextArea.setAttribute("type", "text");
+  mTextArea.setAttribute("aria-labelledby", "message");
   mForm.appendChild(mTextArea);
 
   const mButton = document.createElement("button");
@@ -229,6 +253,7 @@ function launchModal(typeModal, photos, pos) {
   modal.setAttribute("id", "modal_frame");
   modal.classList.add("modal_frame");
   modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
   content.appendChild(modal);
 
   modalCloseButton = document.createElement("button");
@@ -236,6 +261,7 @@ function launchModal(typeModal, photos, pos) {
   modalCloseButton.textContent = "X";
   modalCloseButton.setAttribute("aria-label", "fermeture de la modal");
   modal.appendChild(modalCloseButton);
+  modalCloseButton.focus();
 
   modalContent = document.createElement("div");
   modalContent.setAttribute("id", "contentModal");
@@ -252,11 +278,15 @@ function launchModal(typeModal, photos, pos) {
     modalbg = createContentContact();
     main.style.opacity = "0.2";
     pageHeader.style.opacity = "0.2";
+    main.setAttribute("aria-hidden", "true");
+    pageHeader.setAttribute("aria-hidden", "true");
   } else {
     const pageHeader = document.querySelector(".header__link__page");
     modalbg = createContentCaroussel(photos, pos);
     main.style.display = "none";
     pageHeader.style.display = "none";
+    main.setAttribute("aria-hidden", "true");
+    pageHeader.setAttribute("aria-hidden", "true");
   }
 
   modalContent.appendChild(modalbg);
@@ -270,6 +300,7 @@ function launchModal(typeModal, photos, pos) {
 function closeModal() {
   const modalFrame = document.querySelector(".modal_frame");
   const pageHeader = document.querySelector(".header__link__page");
+  const contactButton = document.querySelector(".modalButton");
   modalFrame.remove();
 
   main.style.opacity = "1";
@@ -277,4 +308,15 @@ function closeModal() {
 
   main.style.display = "flex";
   pageHeader.style.display = "flex";
+
+  main.setAttribute("aria-hidden", "false");
+  pageHeader.setAttribute("aria-hidden", "false");
+  contactButton.focus();
 }
+
+// Fermeture de la modal grace au clavier
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});

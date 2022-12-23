@@ -18,7 +18,7 @@ export function sortingMenu(photos) {
 
   // Boutton choix trie
 
-  const menuSortButton = document.createElement("button");
+  const menuSortButton = document.createElement("div");
   menuSortButton.setAttribute("id", "menu");
   menuSortButton.setAttribute("aria-controls", "options du filtres");
   menuSortButton.setAttribute("aria-expanded", "false");
@@ -26,13 +26,10 @@ export function sortingMenu(photos) {
 
   // Menu selectioné
 
-  const currentChoice = document.createElement("div");
+  const currentChoice = document.createElement("button");
   currentChoice.classList.add("menu_current_choice");
   menuSortButton.appendChild(currentChoice);
   currentChoice.textContent = "Popularité";
-  currentChoice.addEventListener("click", function() {
-    otherChoice.style.display = "block";
-  });
 
   const otherChoice = document.createElement("div");
   otherChoice.classList.add("menu_other_choice");
@@ -40,50 +37,64 @@ export function sortingMenu(photos) {
 
   // popularité
 
-  const menuSort1 = document.createElement("div");
+  const menuSort1 = document.createElement("button");
   otherChoice.appendChild(menuSort1);
   menuSort1.classList.add("choice");
   menuSort1.classList.add("chevron");
+  menuSort1.setAttribute("aria-label", "trier par popularité");
   menuSort1.textContent = "Popularité";
+
+  currentChoice.addEventListener("click", function() {
+    otherChoice.style.display = "block";
+    menuSortButton.setAttribute("aria-expanded", "true");
+  });
 
   menuSort1.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     sortByPopularity(photos);
-
+    menuSortButton.focus();
     currentChoice.textContent = "Popularité";
     otherChoice.style.display = "none";
+    menuSortButton.setAttribute("aria-expanded", "false");
   });
 
   // name
 
-  const menuSort2 = document.createElement("div");
+  const menuSort2 = document.createElement("button");
   otherChoice.appendChild(menuSort2);
   menuSort2.classList.add("choice");
   menuSort2.classList.add("no-chevron");
+  menuSort2.setAttribute("aria-label", "trier par nom");
   menuSort2.textContent = "Name";
   // Afficher la gallerie du photographe / Trier par nom
   menuSort2.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     sortByName(photos);
+    menuSortButton.focus();
     currentChoice.textContent = "Name";
     otherChoice.style.display = "none";
+    menuSortButton.setAttribute("aria-expanded", "false");
   });
 
   // Date
-  const menuSort3 = document.createElement("div");
+  const menuSort3 = document.createElement("button");
   menuSort3.classList.add("choice");
   menuSort3.classList.add("no-chevron");
   otherChoice.appendChild(menuSort3);
+  menuSort3.setAttribute("aria-label", "trier par date");
   menuSort3.textContent = "Date";
+
   // Afficher la gallerie du photographe / Trier par date
   menuSort3.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     sortByDate(photos);
+    menuSortButton.focus();
     currentChoice.textContent = "Date";
     otherChoice.style.display = "none";
+    menuSortButton.setAttribute("aria-expanded", "false");
   });
 }
 

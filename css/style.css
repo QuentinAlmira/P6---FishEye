@@ -107,6 +107,7 @@ header h1 {
   object-fit: cover;
   transform: scale(1.02);
   transition: 0.2s ease-in-out;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .card__tags-container {

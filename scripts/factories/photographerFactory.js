@@ -89,8 +89,10 @@ export async function CreatPhotographerGallery(photos) {
     pictureCard.classList.add("pictureCard");
     pPortfolio.appendChild(pictureCard);
 
-    const pictureCardContent = document.createElement("div");
+    const pictureCardContent = document.createElement("a");
     pictureCardContent.classList.add("pictureCard_content");
+    pictureCardContent.setAttribute("href", "#");
+    pictureCardContent.setAttribute("role", "button");
     pictureCardContent.setAttribute("data-pos", pos);
     pictureCard.appendChild(pictureCardContent);
 
@@ -156,17 +158,20 @@ export async function CreatPhotographerGallery(photos) {
     const buttonLike = document.createElement("button");
     buttonLike.classList.add("like_button");
     buttonLike.setAttribute("aria-label", "aimer ce contenu");
+
     picturePopularity.appendChild(buttonLike);
 
     const heart = document.createElement("i");
     heart.classList.add("fa-regular");
     heart.classList.add("fa-heart");
+    heart.setAttribute("role", "button");
     buttonLike.appendChild(heart);
 
     document.getElementById("name").textContent;
 
     // Managment du compteur de likes
-    heart.addEventListener("click", function(event) {
+
+    buttonLike.addEventListener("click", function(event) {
       if (heart.className.includes("fa-regular")) {
         heart.classList.remove("fa-regular");
         heart.classList.add("fa-solid");
