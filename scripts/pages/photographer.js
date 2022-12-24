@@ -1,4 +1,4 @@
-// ----------->Filtrage et affichage du contenu de la page Photographers<-----------
+//Filtrage et affichage du contenu de la page Photographers
 
 // Fonctions importées :
 import { displayHeader } from "../factories/photographerFactory.js";
