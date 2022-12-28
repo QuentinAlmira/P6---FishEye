@@ -59,7 +59,7 @@
 
   .modal__form__form-content {
     width: 80%;
-    height: 80%;
+    height: 650px;
   }
 
   /* Modal  */
@@ -175,13 +175,13 @@
 
   .modal__form__form-content {
     width: 80%;
-    height: 80%;
+    height: 500px;
   }
 
   /* Modal  */
   .close--cross.contact {
     height: 50px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     position: absolute;
     background-color: #db8876;
     color: #fafafa;
@@ -193,7 +193,7 @@
 
   .modal_header_contact {
     font-size: 1.2em;
-    padding-top: 30px;
+    padding-top: 10px;
   }
 
   .modal_header_name {
