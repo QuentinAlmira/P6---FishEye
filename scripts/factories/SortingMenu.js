@@ -66,14 +66,14 @@ export function sortingMenu(photos) {
   menuSort2.classList.add("choice");
   menuSort2.classList.add("no-chevron");
   menuSort2.setAttribute("aria-label", "trier par nom");
-  menuSort2.textContent = "Name";
+  menuSort2.textContent = "Nom";
   // Afficher la gallerie du photographe / Trier par nom
   menuSort2.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     sortByName(photos);
     menuSortButton.focus();
-    currentChoice.textContent = "Name";
+    currentChoice.textContent = "Nom";
     otherChoice.style.display = "none";
     menuSortButton.setAttribute("aria-expanded", "false");
   });

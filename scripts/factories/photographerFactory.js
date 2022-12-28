@@ -226,45 +226,6 @@ function CreatPhotographerCounter(totalLikes, prix) {
 
   const totalPrice = document.createElement("div");
   totalPrice.classList.add("total_price");
-  totalPrice.textContent = `${prix}/jour`;
+  totalPrice.textContent = `${prix}€/jour`;
   boxLikesPrices.appendChild(totalPrice);
 }
-
-// fonction factory
-
-// class content {
-//   selectOutput() {
-//     const test = document.querySelector("#content");
-//     let divtest = document.createElement("div");
-//     test.appendChild(divtest);
-//   }
-// }
-
-// class image extends content {
-//   selectOutput() {
-//     const pPicture = document.createElement("img");
-//     pPicture.setAttribute(
-//       "src",
-//       `./assets/Portfolio/${img.photographerId}/${img.image}`
-//     );
-//   }
-// }
-
-// class video extends content {
-//   selectOutput() {
-//     console.log("whoaf");
-//   }
-// }
-
-// function factory(type) {
-//   switch (type) {
-//     case "image":
-//       return new image();
-
-//     case "video":
-//       return new video();
-//   }
-// }
-
-// const Pics = factory("image");
-// Pics.selectOutput();

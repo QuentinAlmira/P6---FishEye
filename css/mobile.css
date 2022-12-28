@@ -191,6 +191,25 @@
     cursor: pointer;
   }
 
+  .modal_header_contact {
+    font-size: 1.2em;
+    padding-top: 30px;
+  }
+
+  .modal_header_name {
+    font-size: 1.5em;
+  }
+
+  form label {
+    font-size: 1em;
+  }
+
+  #submitContact {
+    width: 150px;
+    height: 30px;
+    font-size: 1em;
+  }
+
   .close--cross {
     top: 5%;
     right: 2%;
